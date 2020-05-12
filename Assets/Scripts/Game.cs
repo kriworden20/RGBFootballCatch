@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 //Game: manages game play and UI
 public class Game : MonoBehaviour
@@ -29,11 +30,14 @@ public class Game : MonoBehaviour
    
     void Start()
     {
-        //load high score from JSON file
+        //load high score
         panel.SetActive(false);
+        /*
         string jsonText = Resources.Load<TextAsset>("highScore").ToString();
         Save save = Save.CreateFromJSON(jsonText);
         highScore = save.highScore;
+        */
+        Load();
         m = menuDisplay.GetComponent<MenuScript>();
         m.updateHighScore(highScore);
         panel.SetActive(true);
@@ -54,6 +58,7 @@ public class Game : MonoBehaviour
             }
             else if(Input.GetKeyDown(KeyCode.Escape))
             {
+                Save();
                 Application.Quit();
             }
         }
@@ -103,11 +108,42 @@ public class Game : MonoBehaviour
             {
                 highScore = score;
                 m.updateHighScore(highScore);
-                //update json highscore file
+                /*
                 string json = "{\"highScore\":" + highScore + "}";
                 File.WriteAllText(Application.dataPath + "/Resources/highScore.json", json);
+                */
             }
             panel.SetActive(true);
+        }
+    }
+
+    public void Save()
+    {
+        Save save = new Save();
+        save.highScore = highScore;
+
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
+        bf.Serialize(file, save);
+        file.Close();
+    }
+
+    public void Load()
+    {
+        if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
+        {
+            
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/gamesave.save", FileMode.Open);
+            Save save = (Save)bf.Deserialize(file);
+            file.Close();
+
+            highScore = save.highScore;
+
+        }
+        else
+        {
+            Debug.Log("no game saved");
         }
     }
 }

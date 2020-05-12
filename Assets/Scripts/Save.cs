@@ -7,8 +7,10 @@ public class Save
 {
     public int highScore = 0;
 
+    /*
     public static Save CreateFromJSON(string jsonString)
     {
         return JsonUtility.FromJson<Save>(jsonString);
     }
+    */
 }
