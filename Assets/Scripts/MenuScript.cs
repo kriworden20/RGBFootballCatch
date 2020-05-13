@@ -19,9 +19,8 @@ public class MenuScript : MonoBehaviour
 
     }
 
-    public void updateHighScore(int score)
+    public void UpdateHighScore(int score)
     {
-
-        menuText.text = "     High Score: " + score + "\n   Space Bar: Play\n   Esc: Quit";
+        menuText.text = "   High Score: " + score + "\n   Space Bar: Play\n   Esc: Quit";
     }
 }

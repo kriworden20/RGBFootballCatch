@@ -5,7 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     Animator anim;
- 
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +20,11 @@ public class Player : MonoBehaviour
 
     void Check()
     {
+        /*r key down: 'run' animation
+         * r key up: 'idle' animation
+         * b key down: 'run backwards' animation
+         * b key up: 'idle' animation
+         */
         if (Input.GetKeyDown(KeyCode.R))
         {
             anim.SetBool("isRun", true);

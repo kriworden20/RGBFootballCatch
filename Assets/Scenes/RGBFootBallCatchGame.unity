@@ -387,7 +387,6 @@ GameObject:
   - component: {fileID: 293077795}
   - component: {fileID: 293077794}
   - component: {fileID: 293077793}
-  - component: {fileID: 293077797}
   m_Layer: 0
   m_Name: BallShooter
   m_TagString: Untagged
@@ -470,24 +469,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -51.222004, y: 0, z: 0}
---- !u!114 &293077797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 293077792}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22d345c6118a47a4eae90fc74a21b50d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ballPrefab: {fileID: 1958369311951884788, guid: 7eff77c3e4fd16c42a8626971d4a0452,
-    type: 3}
-  spawner: {fileID: 57553227}
-  b: {fileID: 0}
-  score: 0
-  ballsCaught: 0
 --- !u!1 &429700844
 GameObject:
   m_ObjectHideFlags: 0

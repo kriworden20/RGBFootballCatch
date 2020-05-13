@@ -19,7 +19,7 @@ public class ScoreScript : MonoBehaviour
        
     }
 
-    public void UpdateUI(int score)
+    public void UpdateScore(int score)
     {
 
         scoreText.text = "Score: " + score;

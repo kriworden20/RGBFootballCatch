@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -25,40 +24,32 @@ public class Game : MonoBehaviour
     private int ballsCaught = 0;
     private bool gameOn = false;
 
-
-
-   
     void Start()
     {
-        //load high score
         panel.SetActive(false);
-        /*
-        string jsonText = Resources.Load<TextAsset>("highScore").ToString();
-        Save save = Save.CreateFromJSON(jsonText);
-        highScore = save.highScore;
-        */
-        Load();
+        Load(); //load save data
+        s = scoreDisplay.GetComponent<ScoreScript>();
         m = menuDisplay.GetComponent<MenuScript>();
-        m.updateHighScore(highScore);
+        m.UpdateHighScore(highScore); //set high score text
         panel.SetActive(true);
     }
+
     void Update()
     {
         if(!gameOn)
         {
             if(Input.GetKeyDown(KeyCode.Space))
             {
-                s = scoreDisplay.GetComponent<ScoreScript>();
                 score = 0;
                 ballsCaught = 0;
-                s.UpdateUI(score);
+                s.UpdateScore(score); //reset score text
                 panel.SetActive(false);
                 gameOn = true;
                 ShootBall();
             }
             else if(Input.GetKeyDown(KeyCode.Escape))
             {
-                Save();
+                Save(); //save high score
                 Application.Quit();
             }
         }
@@ -67,7 +58,6 @@ public class Game : MonoBehaviour
             proceedGame();
         }
     }
-
 
     public void ShootBall()
     {
@@ -86,9 +76,8 @@ public class Game : MonoBehaviour
         {
             score += ballsCaught / 5 + 1;
         }
-        //Display score to UI
-        s = scoreDisplay.GetComponent<ScoreScript>();
-        s.UpdateUI(score);
+        //update score
+        s.UpdateScore(score);
     }
 
     public void proceedGame()
@@ -107,11 +96,7 @@ public class Game : MonoBehaviour
             if(highScore < score)
             {
                 highScore = score;
-                m.updateHighScore(highScore);
-                /*
-                string json = "{\"highScore\":" + highScore + "}";
-                File.WriteAllText(Application.dataPath + "/Resources/highScore.json", json);
-                */
+                m.UpdateHighScore(highScore);
             }
             panel.SetActive(true);
         }

@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//has functions to set ball type, detect collisions, and destroy ball instance
 public class Ball : MonoBehaviour
 {
     public bool hitGround = false;
     public bool hitPlayer = false;
     private float velocity = 0;
 
-    public float CreateBall() //returns velocity
+    public float CreateBall() //returns velocity according to randomly generated color
     {
         string jsonText = Resources.Load<TextAsset>("Ball").ToString();
         BallType ballData = BallType.CreateFromJSON(jsonText);
@@ -32,7 +33,6 @@ public class Ball : MonoBehaviour
         }
         return velocity;
     }
-
 
     void OnCollisionEnter(Collision collision)
     {
